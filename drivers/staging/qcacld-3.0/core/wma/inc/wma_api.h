@@ -32,6 +32,7 @@
 #include "cds_concurrency.h"
 #include "cds_utils.h"
 #include "wma_sar_public_structs.h"
+#include "ol_txrx.h"
 
 typedef void *WMA_HANDLE;
 
@@ -368,6 +369,18 @@ static inline QDF_STATUS wma_encrypt_decrypt_msg(WMA_HANDLE wma,
 #endif
 
 /**
+ * wma_find_if_fw_supports_dbs() - to check if FW supports DBS
+ *
+ * Firmware sends supported HW mode as part of service ready and
+ * service ready extension WMI message. This API checks through
+ * those HW mode list and figures out if DBS is supported by
+ * FW/HW.
+ *
+ * Return: True if FW/HW supports DBS else returns false.
+ */
+bool wma_find_if_fw_supports_dbs(void);
+
+/**
  * wma_set_cts2self_for_p2p_go() - set CTS2SELF command for P2P GO.
  * @wma_handle:                  pointer to wma handle.
  * @cts2self_for_p2p_go:         value needs to set to firmware.
@@ -595,4 +608,16 @@ void wma_cleanup_vdev_resp_and_hold_req(void *priv);
  */
 QDF_STATUS wma_send_dhcp_ind(uint16_t type, uint8_t device_mode,
 			     uint8_t *mac_addr, uint8_t *sta_mac_addr);
+
+/**
+ * wma_mgmt_pktcapture_status_map() - map Tx status for MGMT packets
+ * with packet capture Tx status
+ * @status: Tx status
+ * @is_data_pkt: Tx status for data packets
+ *
+ * Return: pktcapture_tx_status enum
+ */
+enum pktcapture_tx_status
+wma_mgmt_pktcapture_status_map(uint8_t status);
+
 #endif
