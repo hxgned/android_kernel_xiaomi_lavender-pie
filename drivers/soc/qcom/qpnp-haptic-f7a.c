@@ -2282,9 +2282,6 @@ static void qpnp_hap_td_enable(struct timed_output_dev *dev, int time_ms)
 #else
 
 #ifdef CONFIG_KERNEL_CUSTOM_F7A
-
-    pr_info("zjl hasfasda  haptic  =%d\n", time_ms);
-
  	vmax_mv = hap->vmax_mv;
 	qpnp_hap_vmax_config(hap, vmax_mv, false);
 #else
