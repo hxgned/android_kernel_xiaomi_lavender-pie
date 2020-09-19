@@ -420,8 +420,6 @@ static enum power_supply_property smb2_usb_props[] = {
 	POWER_SUPPLY_PROP_RERUN_APSD,
 };
 
-extern bool is_poweroff_charge;
-
 static int smb2_usb_get_prop(struct power_supply *psy,
 		enum power_supply_property psp,
 		union power_supply_propval *val)
@@ -448,7 +446,7 @@ static int smb2_usb_get_prop(struct power_supply *psy,
 			val->intval = 0;
 		else
 			val->intval = 1;
-		if ((is_poweroff_charge != true) && (chg->real_charger_type == POWER_SUPPLY_TYPE_UNKNOWN))
+		if (chg->real_charger_type == POWER_SUPPLY_TYPE_UNKNOWN)
 			val->intval = 0;
 		break;
 	case POWER_SUPPLY_PROP_VOLTAGE_MAX:
